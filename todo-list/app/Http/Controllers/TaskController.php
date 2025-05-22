@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Task;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -12,7 +13,7 @@ class TaskController extends Controller
     public function index()
     {
         $tasks = Task::all();
-        return viev('task.index', compact('tasks'));
+        return view('task.index', compact('tasks'));
     }
 
     /**
@@ -39,7 +40,7 @@ class TaskController extends Controller
      */
     public function show(string $id)
     {
-        
+        //
     }
 
     /**
@@ -53,16 +54,16 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Task $task)
     {
         $task->update(['completed' => !$task->completed]);
-         return redirect('/');
+        return redirect('/');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Task $task)
     {
         $task->delete();
         return redirect('/');
